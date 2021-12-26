@@ -1,54 +1,88 @@
 package com.hamza.counter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView counterText ;
+    TextView countertextview;
+    int counter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        counterText = findViewById(R.id.textView);
+        countertextview = findViewById(R.id.counterTextview);
+
+        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+        counter = prefs.getInt("key", 0);
+        countertextview.setText(String.valueOf(counter));
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
-   //Onclick method form increasing the number by one and change the color every 10 numbers
-    public void increaseNumber(View view) {
-
-        String number = counterText.getText().toString();
-        int n = Integer.parseInt(number);
-        n++;
-        String a = Integer.valueOf(n).toString();
-
-        //set the number after increase it by one
-        counterText.setText(a);
-
-        //to change the color every 10 Counts
-        if (n >= 10 && n <= 19){
-            counterText.setTextColor(getResources().getColor(R.color.yallow));
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.Reset:
+                resetCounter();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else if (n >= 20 && n <= 29){
-            counterText.setTextColor(getResources().getColor(R.color.red));
-        }
-        else{
-            counterText.setTextColor(getResources().getColor(R.color.black));
-        }
+    }
+
+    public void increaseCounterInrelativeLayout(View view) {
+        counter++;
+        checkCounter();
+        countertextview.setText(String.valueOf(counter));
+
+        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("key", counter);
+        editor.commit();
+    }
+
+    private void checkCounter() {
+        if (counter % 10 == 0)
+            countertextview.setTextColor(getRandomcolor());
 
     }
 
-    //OnClick method to Reset the counter to Zero
-    public void resetNumber (View view){
-        //set the counter to Zero
-        counterText.setText("0");
+    private int getRandomcolor() {
+        int[] colors = {Color.BLUE, Color.RED, Color.YELLOW};
+        int random = new Random().nextInt(colors.length);
+        return colors[random];
     }
 
+    private void resetCounter() {
+        counter = 0;
+        countertextview.setText(String.valueOf(counter));
+        countertextview.setTextColor(Color.BLACK);
+    }
 
+    /*public void resetCounter(View view) {
+        counter = 0;
+        countertextview.setText(String.valueOf(counter));
+        countertextview.setTextColor(Color.BLACK);
+    }*/
 }
