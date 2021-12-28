@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">عداد</string>
+    <string name="_0">0</string>
+    <string name="reset">إعادة</string>
+    <string name="top_score">اعلى رقم</string>
+    <string name="reset_top_score" >إعادة اعلى رقم</string>
+</resources>

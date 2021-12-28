@@ -2,7 +2,8 @@
     <string name="app_name">Counter</string>
     <string name="_0">0</string>
     <string name="reset">reset</string>
-    <string name="Reset">Reset</string>
+    <string name="top_score">Top Score:</string>
+    <string name="reset_top_score">Reset Top Score</string>
 
 
 </resources>

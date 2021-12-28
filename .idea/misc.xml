@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProjects/Counter/app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
+        <entry key="..\:/AndroidProjects/Counter/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/Counter/app/src/main/res/layout/splash_screen.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/Counter/app/src/main/res/menu/menu.xml" value="0.2598958333333333" />
       </map>
     </option>
