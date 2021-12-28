@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menuOption_clear:
                 totalCounter = 0;
                 tv_totalValue.setText(String.valueOf(totalCounter));
+                Toast.makeText(getBaseContext(), "Successfully reset", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
