@@ -3,6 +3,7 @@
     <string name="_0">0</string>
     <string name="reset">reset</string>
     <string name="Reset">Reset</string>
+    <string name="delete_all_counts">Delete all counts</string>
 
 
 </resources>
