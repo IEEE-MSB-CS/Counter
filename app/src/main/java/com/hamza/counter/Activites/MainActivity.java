@@ -1,5 +1,6 @@
-package com.hamza.counter;
+package com.hamza.counter.Activites;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,14 +20,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hamza.counter.R;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView countertextview , topScoreNumber ;
-    int counter , topScore;
-    Context context;
-    Resources resources;
+    TextView counterTextView , topScoreTextView ;
+    int counter = 0 , topScore = 0;
 
 
 
@@ -35,13 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        countertextview = findViewById(R.id.counterTextview);
-        topScoreNumber = findViewById(R.id.topScoreNumber);
+        counterTextView = findViewById(R.id.counterTextview);
+        topScoreTextView = findViewById(R.id.topScoreNumber);
 
-
-        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
-        topScore = prefs.getInt("key", 0);
-        topScoreNumber.setText(String.valueOf(topScore));
+        setTopScoreText(getTopScore());
 
     }
 
@@ -52,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -66,44 +65,58 @@ public class MainActivity extends AppCompatActivity {
 
     public void increaseCounterInrelativeLayout(View view) {
         counter++;
+        topScore++;
         checkCounter();
-        countertextview.setText(String.valueOf(counter));
-
-
-        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        if(counter > topScore){
-            editor.putInt("key", counter);
-            editor.commit();
-        }
-
-
+        saveCounts();
+        counterTextView.setText(String.valueOf(counter));
     }
 
     private void checkCounter() {
         if (counter % 10 == 0)
-            countertextview.setTextColor(getRandomcolor());
+            counterTextView.setTextColor(getRandomColor());
     }
 
-    private int getRandomcolor() {
+    private int getRandomColor() {
         int[] colors = {Color.BLUE, Color.RED, Color.YELLOW};
         int random = new Random().nextInt(colors.length);
         return colors[random];
     }
 
-
-    public void resetTopScore() {
-       topScore = 0;
-       topScoreNumber.setText(String.valueOf(topScore));
-
-        Toast.makeText(this, "Your Top Score Has Been Reset", Toast.LENGTH_SHORT).show();
-
+    public void saveCounts() {
+        SharedPreferences.Editor editor = getSharedPreferences("PREF", MODE_PRIVATE).edit();
+        editor.putInt("counter", topScore);
+        editor.apply();
+        setTopScoreText(topScore);
     }
 
     public void resetCounter(View view) {
         counter = 0;
-        countertextview.setText(String.valueOf(counter));
-        countertextview.setTextColor(Color.BLACK);
+        counterTextView.setText(String.valueOf(counter));
+        counterTextView.setTextColor(Color.BLACK);
     }
+
+    @SuppressLint("SetTextI18n")
+    public void setTopScoreText(int topScoreNumber) {
+        topScoreTextView.setText("Top Score :" + topScoreNumber);
+    }
+
+    public int getTopScore() {
+        SharedPreferences preference = getSharedPreferences("PREF", MODE_PRIVATE);
+        topScore = preference.getInt("counts", 0);
+        return topScore;
+    }
+
+
+    public void resetTopScore() {
+       topScore = 0;
+       saveCounts();
+       Toast.makeText(this, "Your Top Score Has Been Reset", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+
+
+
 }
