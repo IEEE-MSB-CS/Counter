@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">العداد</string>
+    <string name="tit_clear_total">مسح الاجمالى</string>
+    <string name="tit_language">English</string>
+    <string name="txt_0">0</string>
+    <string name="BTxt_reset">اعادة تعيين</string>
+    <string name="txt_total_counter">اجمالى العداد</string>
+    <string name="txt_null">لا شئ</string>
+</resources>

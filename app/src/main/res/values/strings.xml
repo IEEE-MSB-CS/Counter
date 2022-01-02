@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Counter</string>
-
-
+    <string name="tit_clear_total">Clear total</string>
+    <string name="tit_language">العربية</string>
+    <string name="txt_0">0</string>
+    <string name="BTxt_reset">Reset</string>
+    <string name="txt_total_counter">Total counter</string>
+    <string name="txt_null">null</string>
 </resources>
